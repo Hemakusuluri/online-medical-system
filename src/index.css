@@ -1,0 +1,56 @@
+/* ===== GLOBAL BLACK + TOMATO THEME ===== */
+
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  background-color: black !important;
+}
+
+.navbar-brand {
+  color: tomato !important;
+  font-weight: bold;
+}
+
+.logout-btn {
+  background-color: tomato;
+  color: white;
+  border: none;
+  padding: 6px 15px;
+  border-radius: 5px;
+}
+
+.logout-btn:hover {
+  opacity: 0.8;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  color: tomato;
+}
+
+/* Cards */
+.card {
+  background-color: #111;
+  color: white;
+  border: 1px solid tomato;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-success,
+.btn-warning {
+  background-color: tomato !important;
+  border: none !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-warning:hover {
+  opacity: 0.8;
+}
