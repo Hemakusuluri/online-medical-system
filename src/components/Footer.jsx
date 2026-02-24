@@ -8,7 +8,7 @@ function Footer() {
         padding: "15px"
       }}
     >
-      © 2026 Online Medical Consultation System | Developed by Hema
+      © 2026 Online Medical Consultation System
     </footer>
   );
 }
