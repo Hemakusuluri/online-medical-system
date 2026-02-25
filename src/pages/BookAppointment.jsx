@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function BookAppointment() {
+  const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
   const [formData, setFormData] = useState({
-    patientName: "",
     doctorName: "",
     date: "",
     time: ""
   });
+
+  const [appointments, setAppointments] = useState([]);
+
+  useEffect(() => {
+    const storedAppointments =
+      JSON.parse(localStorage.getItem("appointments")) || [];
+    setAppointments(storedAppointments);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -17,10 +26,25 @@ function BookAppointment() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const newAppointment = {
+      patientName: loggedUser.username,
+      doctorName: formData.doctorName,
+      date: formData.date,
+      time: formData.time
+    };
+
+    const existing =
+      JSON.parse(localStorage.getItem("appointments")) || [];
+
+    const updated = [...existing, newAppointment];
+
+    localStorage.setItem("appointments", JSON.stringify(updated));
+    setAppointments(updated);
+
     alert("Appointment Booked Successfully!");
 
     setFormData({
-      patientName: "",
       doctorName: "",
       date: "",
       time: ""
@@ -37,9 +61,7 @@ function BookAppointment() {
         color: "white"
       }}
     >
-      <h1 style={{ marginBottom: "40px" }}>
-        Book Appointment
-      </h1>
+      <h1 style={{ marginBottom: "40px" }}>Book Appointment</h1>
 
       <form
         onSubmit={handleSubmit}
@@ -54,20 +76,12 @@ function BookAppointment() {
       >
         <input
           type="text"
-          name="patientName"
-          placeholder="Patient Name"
-          value={formData.patientName}
-          onChange={handleChange}
-          style={inputStyle}
-        />
-
-        <input
-          type="text"
           name="doctorName"
           placeholder="Doctor Name"
           value={formData.doctorName}
           onChange={handleChange}
           style={inputStyle}
+          required
         />
 
         <input
@@ -76,6 +90,7 @@ function BookAppointment() {
           value={formData.date}
           onChange={handleChange}
           style={inputStyle}
+          required
         />
 
         <input
@@ -84,24 +99,44 @@ function BookAppointment() {
           value={formData.time}
           onChange={handleChange}
           style={inputStyle}
+          required
         />
 
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            padding: "12px",
-            backgroundColor: "tomato",
-            color: "white",
-            border: "none",
-            borderRadius: "6px",
-            fontSize: "16px",
-            marginTop: "15px"
-          }}
-        >
+        <button type="submit" style={buttonStyle}>
           Book Now
         </button>
       </form>
+
+      {/* Show Appointments */}
+      <div style={{ marginTop: "50px" }}>
+        <h2 style={{ color: "white" }}>Your Appointments</h2>
+
+        {appointments
+          .filter((a) => a.patientName === loggedUser?.username)
+          .map((appointment, index) => (
+            <div
+              key={index}
+              style={{
+                backgroundColor: "#111",
+                padding: "15px",
+                margin: "15px auto",
+                width: "450px",
+                borderRadius: "8px",
+                boxShadow: "0 0 10px rgba(255,99,71,0.3)"
+              }}
+            >
+              <p><strong>Doctor:</strong> {appointment.doctorName}</p>
+              <p><strong>Date:</strong> {appointment.date}</p>
+              <p><strong>Time:</strong> {appointment.time}</p>
+            </div>
+          ))}
+
+        {appointments.filter(
+          (a) => a.patientName === loggedUser?.username
+        ).length === 0 && (
+          <p style={{ color: "#ccc" }}>No Appointments Booked Yet</p>
+        )}
+      </div>
     </div>
   );
 }
@@ -114,6 +149,17 @@ const inputStyle = {
   border: "1px solid tomato",
   backgroundColor: "#222",
   color: "white"
+};
+
+const buttonStyle = {
+  width: "100%",
+  padding: "12px",
+  backgroundColor: "tomato",
+  border: "none",
+  color: "white",
+  borderRadius: "6px",
+  fontSize: "16px",
+  marginTop: "10px"
 };
 
 export default BookAppointment;
