@@ -5,6 +5,7 @@ function Login() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    role: "",
     username: "",
     password: ""
   });
@@ -24,26 +25,38 @@ function Login() {
     const foundUser = users.find(
       (user) =>
         user.username === formData.username &&
-        user.password === formData.password
+        user.password === formData.password &&
+        user.role === formData.role
     );
 
     if (!foundUser) {
-      alert("Invalid Username or Password");
+      alert("Invalid Credentials!");
       return;
     }
 
     localStorage.setItem("loggedInUser", JSON.stringify(foundUser));
 
-    if (foundUser.role === "admin") navigate("/admin");
-    if (foundUser.role === "doctor") navigate("/doctor");
-    if (foundUser.role === "patient") navigate("/patient");
-    if (foundUser.role === "pharmacist") navigate("/pharmacist");
+    navigate(`/${formData.role}`);
   };
 
   return (
     <div style={containerStyle}>
       <form onSubmit={handleLogin} style={cardStyle}>
         <h2 style={{ color: "white" }}>Login</h2>
+
+        <select
+          name="role"
+          value={formData.role}
+          onChange={handleChange}
+          style={inputStyle}
+          required
+        >
+          <option value="">Select Role</option>
+          <option value="admin">Admin</option>
+          <option value="doctor">Doctor</option>
+          <option value="patient">Patient</option>
+          <option value="pharmacist">Pharmacist</option>
+        </select>
 
         <input
           type="text"
@@ -67,6 +80,18 @@ function Login() {
 
         <button type="submit" style={buttonStyle}>
           Login
+        </button>
+
+        <p style={{ marginTop: "20px", color: "#ccc" }}>
+          New User?
+        </p>
+
+        <button
+          type="button"
+          onClick={() => navigate("/register")}
+          style={registerButtonStyle}
+        >
+          Register Now
         </button>
       </form>
     </div>
@@ -105,6 +130,15 @@ const buttonStyle = {
   padding: "10px",
   backgroundColor: "tomato",
   border: "none",
+  color: "white",
+  borderRadius: "5px"
+};
+
+const registerButtonStyle = {
+  width: "100%",
+  padding: "8px",
+  backgroundColor: "#333",
+  border: "1px solid tomato",
   color: "white",
   borderRadius: "5px"
 };
