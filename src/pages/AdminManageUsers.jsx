@@ -6,7 +6,8 @@ function AdminManageUsers() {
   );
 
   const [newUser, setNewUser] = useState({
-    name: "",
+    username: "",
+    password: "",
     role: ""
   });
 
@@ -24,134 +25,86 @@ function AdminManageUsers() {
     setUsers(updatedUsers);
     localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-    setNewUser({ name: "", role: "" });
-  };
+    alert("User Registered Successfully!");
 
-  const handleDelete = (index) => {
-    const updatedUsers = users.filter((_, i) => i !== index);
-    setUsers(updatedUsers);
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    setNewUser({ username: "", password: "", role: "" });
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: "black",
-        minHeight: "100vh",
-        padding: "60px 20px",
-        color: "white"
-      }}
-    >
-      <div style={{ maxWidth: "700px", margin: "auto" }}>
+    <div style={containerStyle}>
+      <div style={cardStyle}>
+        <h2 style={{ color: "white" }}>Register User</h2>
 
-        <h1 style={{ textAlign: "center", marginBottom: "40px" }}>
-          Admin - Manage Users
-        </h1>
+        <input
+          name="username"
+          placeholder="Username"
+          value={newUser.username}
+          onChange={handleChange}
+          style={inputStyle}
+        />
 
-        <div
-          style={{
-            backgroundColor: "#111",
-            padding: "30px",
-            borderRadius: "10px",
-            boxShadow: "0 0 15px rgba(255,99,71,0.4)"
-          }}
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={newUser.password}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+
+        <select
+          name="role"
+          value={newUser.role}
+          onChange={handleChange}
+          style={inputStyle}
         >
-          <input
-            type="text"
-            name="name"
-            placeholder="User Name"
-            value={newUser.name}
-            onChange={handleChange}
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "15px",
-              borderRadius: "5px",
-              border: "1px solid tomato",
-              backgroundColor: "#222",
-              color: "white"
-            }}
-          />
+          <option value="">Select Role</option>
+          <option value="doctor">Doctor</option>
+          <option value="patient">Patient</option>
+          <option value="pharmacist">Pharmacist</option>
+        </select>
 
-          <select
-            name="role"
-            value={newUser.role}
-            onChange={handleChange}
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "15px",
-              borderRadius: "5px",
-              border: "1px solid tomato",
-              backgroundColor: "#222",
-              color: "white"
-            }}
-          >
-            <option value="">Select Role</option>
-            <option value="admin">Admin</option>
-            <option value="doctor">Doctor</option>
-            <option value="patient">Patient</option>
-            <option value="pharmacist">Pharmacist</option>
-          </select>
-
-          <button
-            onClick={handleAddUser}
-            style={{
-              width: "100%",
-              padding: "12px",
-              backgroundColor: "tomato",
-              color: "white",
-              border: "none",
-              borderRadius: "6px",
-              fontSize: "16px"
-            }}
-          >
-            Add User
-          </button>
-        </div>
-
-        <h3 style={{ marginTop: "40px" }}>Existing Users</h3>
-
-        {users.length === 0 ? (
-          <p>No users added.</p>
-        ) : (
-          users.map((user, index) => (
-            <div
-              key={index}
-              style={{
-                backgroundColor: "#111",
-                padding: "15px",
-                marginTop: "15px",
-                borderRadius: "8px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                boxShadow: "0 0 10px rgba(255,99,71,0.3)"
-              }}
-            >
-              <span>
-                {user.name} - {user.role}
-              </span>
-
-              <button
-                onClick={() => handleDelete(index)}
-                style={{
-                  backgroundColor: "tomato",
-                  color: "white",
-                  border: "none",
-                  padding: "6px 12px",
-                  borderRadius: "5px"
-                }}
-              >
-                Delete
-              </button>
-            </div>
-          ))
-        )}
-
+        <button onClick={handleAddUser} style={buttonStyle}>
+          Register
+        </button>
       </div>
     </div>
   );
 }
+
+const containerStyle = {
+  backgroundColor: "black",
+  minHeight: "100vh",
+  paddingTop: "80px",
+  textAlign: "center"
+};
+
+const cardStyle = {
+  backgroundColor: "#111",
+  padding: "40px",
+  borderRadius: "10px",
+  width: "400px",
+  margin: "auto",
+  boxShadow: "0 0 15px rgba(255,99,71,0.4)"
+};
+
+const inputStyle = {
+  width: "100%",
+  padding: "10px",
+  marginBottom: "15px",
+  borderRadius: "5px",
+  border: "1px solid tomato",
+  backgroundColor: "#222",
+  color: "white"
+};
+
+const buttonStyle = {
+  backgroundColor: "tomato",
+  padding: "10px",
+  border: "none",
+  color: "white",
+  width: "100%",
+  borderRadius: "5px"
+};
 
 export default AdminManageUsers;
