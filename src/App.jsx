@@ -14,6 +14,7 @@ import PharmacistDashboard from "./pages/PharmacistDashboard";
 import BookAppointment from "./pages/BookAppointment";
 import AddPrescription from "./pages/AddPrescription";
 import AdminManageUsers from "./pages/AdminManageUsers";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/book-appointment" element={<BookAppointment />} />
         <Route path="/add-prescription" element={<AddPrescription />} />
         <Route path="/manage-users" element={<AdminManageUsers />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
 
       {/* Bottom Footer */}
