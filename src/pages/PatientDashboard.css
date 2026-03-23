@@ -1,4 +1,4 @@
-.patient-container {
+.pharma-container {
   padding: 40px;
   background: #f5f7f8;
   min-height: 100vh;
@@ -24,15 +24,14 @@
   border-radius: 15px;
 }
 
-/* Sections */
-.section {
+/* Queue */
+.queue {
   background: #dcdcdc;
   padding: 20px;
   border-radius: 15px;
-  margin-bottom: 20px;
 }
 
-.appointment-item {
+.queue-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,24 +41,32 @@
   margin-top: 10px;
 }
 
-.appointment-item span {
-  color: gray;
-  font-size: 14px;
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.status-btn {
-  background: #ccc;
+.icon {
+  font-size: 20px;
+  background: #c8f7dc;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.queue-item span {
+  display: block;
+  color: gray;
+}
+
+.queue-item small {
+  color: gray;
+}
+
+.ready-btn {
+  background: #7be0a8;
   border: none;
-  padding: 5px 10px;
+  padding: 8px 12px;
   border-radius: 10px;
-}
-
-/* Empty Box */
-.empty-box {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  color: gray;
-  margin-top: 10px;
+  cursor: pointer;
 }
