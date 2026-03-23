@@ -1,60 +1,64 @@
-import "./PatientDashboard.css";
+import "./PharmacistDashboard.css";
 
-function PatientDashboard() {
+function PharmacistDashboard() {
   return (
-    <div className="patient-container">
+    <div className="pharma-container">
 
-      <h2>Welcome, John Smith</h2>
-      <p className="subtitle">Manage your healthcare journey</p>
+      <h2>Pharmacy Portal</h2>
+      <p className="subtitle">Manage and verify e-prescriptions</p>
 
       {/* Top Cards */}
       <div className="cards">
         <div className="card-box">
-          <h4>Book Appointment</h4>
-          <p>Schedule a consultation</p>
+          <h3 style={{ color: "blue" }}>0</h3>
+          <p>Pending Verification</p>
         </div>
 
         <div className="card-box">
-          <h4>Medical Records</h4>
-          <p>0 prescriptions</p>
+          <h3 style={{ color: "orange" }}>0</h3>
+          <p>Processing</p>
         </div>
 
         <div className="card-box">
-          <h4>Lab Reports</h4>
-          <p>View results</p>
-        </div>
-
-        <div className="card-box">
-          <h4>Video Consult</h4>
-          <p>Join session</p>
+          <h3 style={{ color: "green" }}>2</h3>
+          <p>Ready for Pickup</p>
         </div>
       </div>
 
-      {/* Appointments */}
-      <div className="section">
-        <h3>My Appointments</h3>
+      {/* Prescription Queue */}
+      <div className="queue">
+        <h3>E-Prescription Queue</h3>
 
-        <div className="appointment-item">
-          <div>
-            <p><strong>Dr. Sarah Chen</strong></p>
-            <span>General Medicine • 2026-02-28 at 11:00 AM</span>
+        <div className="queue-item">
+          <div className="left">
+            <div className="icon">📄</div>
+            <div>
+              <p><strong>hema</strong></p>
+              <span>dolo - 650</span>
+              <small>Dr. Sarah Chen</small>
+            </div>
           </div>
 
-          <button className="status-btn">Scheduled</button>
+          <button className="ready-btn">✓ Ready for Pickup</button>
         </div>
-      </div>
 
-      {/* Prescriptions */}
-      <div className="section">
-        <h3>My E-Prescriptions</h3>
+        <div className="queue-item">
+          <div className="left">
+            <div className="icon">📄</div>
+            <div>
+              <p><strong>Sri</strong></p>
+              <span>paracetamol - 500</span>
+              <small>Dr. Sarah Chen</small>
+            </div>
+          </div>
 
-        <div className="empty-box">
-          No prescriptions yet
+          <button className="ready-btn">✓ Ready for Pickup</button>
         </div>
+
       </div>
 
     </div>
   );
 }
 
-export default PatientDashboard;
+export default PharmacistDashboard;
