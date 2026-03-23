@@ -1,13 +1,50 @@
+import { useState } from "react";
 import "./DoctorDashboard.css";
 
 function DoctorDashboard() {
+  const [form, setForm] = useState({
+    patient: "",
+    medicine: "",
+    dosage: "",
+    notes: ""
+  });
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  // 🔥 Submit Prescription
+  const handleSubmit = () => {
+    const existing = JSON.parse(localStorage.getItem("prescriptions")) || [];
+
+    existing.push(form);
+
+    localStorage.setItem("prescriptions", JSON.stringify(existing));
+
+    alert("Prescription sent to Pharmacist ✅");
+
+    setForm({
+      patient: "",
+      medicine: "",
+      dosage: "",
+      notes: ""
+    });
+  };
+
+  const startConsult = () => {
+    alert("Consultation started with patient 👨‍⚕️");
+  };
+
   return (
     <div className="doctor-container">
 
       <h2>Doctor Portal</h2>
       <p className="subtitle">Manage consultations and prescriptions</p>
 
-      {/* Top Cards */}
+      {/* Cards */}
       <div className="cards">
         <div className="card-box">
           <h3 style={{ color: "teal" }}>1</h3>
@@ -25,7 +62,7 @@ function DoctorDashboard() {
         </div>
       </div>
 
-      {/* Appointments */}
+      {/* Appointment */}
       <div className="appointments">
         <h3>Today's Appointments</h3>
 
@@ -37,7 +74,9 @@ function DoctorDashboard() {
 
           <div>
             <button className="status-btn">Scheduled</button>
-            <button className="start-btn">Start Consult</button>
+            <button className="start-btn" onClick={startConsult}>
+              Start Consult
+            </button>
           </div>
         </div>
       </div>
@@ -47,13 +86,42 @@ function DoctorDashboard() {
         <h3>Issue E-Prescription</h3>
 
         <div className="form-grid">
-          <input type="text" placeholder="Enter patient name" />
-          <input type="text" placeholder="Medication name" />
-          <input type="text" placeholder="e.g., 500mg twice daily" />
-          <input type="text" placeholder="Optional notes" />
+          <input
+            type="text"
+            name="patient"
+            placeholder="Enter patient name"
+            value={form.patient}
+            onChange={handleChange}
+          />
+
+          <input
+            type="text"
+            name="medicine"
+            placeholder="Medication name"
+            value={form.medicine}
+            onChange={handleChange}
+          />
+
+          <input
+            type="text"
+            name="dosage"
+            placeholder="e.g., 500mg twice daily"
+            value={form.dosage}
+            onChange={handleChange}
+          />
+
+          <input
+            type="text"
+            name="notes"
+            placeholder="Optional notes"
+            value={form.notes}
+            onChange={handleChange}
+          />
         </div>
 
-        <button className="submit-btn">Submit Prescription</button>
+        <button className="submit-btn" onClick={handleSubmit}>
+          Submit Prescription
+        </button>
       </div>
 
     </div>
