@@ -1,24 +1,22 @@
-import { Link, useNavigate } from "react-router-dom";
-
 function Navbar() {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    navigate("/");
-  };
-
   return (
-    <nav className="navbar navbar-expand-lg">
-      <div className="container">
-        <Link className="navbar-brand" to="/">
-          MedSystem
-        </Link>
-
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
-        </button>
+    <div style={{
+      display: "flex",
+      justifyContent: "space-between",
+      padding: "15px 30px",
+      background: "#fff",
+      borderBottom: "1px solid #ddd"
+    }}>
+      <div>
+        <strong>MediConnect</strong><br />
+        <small>Admin Portal</small>
       </div>
-    </nav>
+
+      <div>
+        <span style={{ marginRight: "20px", color: "green" }}>● Online</span>
+        <button>Logout</button>
+      </div>
+    </div>
   );
 }
 
