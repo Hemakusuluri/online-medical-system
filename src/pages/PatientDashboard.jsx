@@ -1,105 +1,60 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import "./PatientDashboard.css";
 
 function PatientDashboard() {
-  const navigate = useNavigate();
-  const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
-
-  const [appointments, setAppointments] = useState([]);
-
-  useEffect(() => {
-    const storedAppointments =
-      JSON.parse(localStorage.getItem("appointments")) || [];
-    setAppointments(storedAppointments);
-  }, []);
-
-  const patientAppointments = appointments.filter(
-    (a) => a.patientName === loggedUser?.username
-  );
-
   return (
-    <div
-      style={{
-        backgroundColor: "black",
-        minHeight: "100vh",
-        paddingTop: "80px",
-        textAlign: "center",
-        color: "white"
-      }}
-    >
-      <h1 style={{ marginBottom: "10px" }}>Patient Dashboard</h1>
+    <div className="patient-container">
 
-      <h3 style={{ color: "white", marginBottom: "40px" }}>
-        Welcome, {loggedUser?.username}
-      </h3>
+      <h2>Welcome, John Smith</h2>
+      <p className="subtitle">Manage your healthcare journey</p>
 
-      {/* Book Appointment Card */}
-      <div
-        style={{
-          backgroundColor: "#111",
-          padding: "40px",
-          borderRadius: "10px",
-          width: "450px",
-          margin: "auto",
-          boxShadow: "0 0 15px rgba(255,99,71,0.4)"
-        }}
-      >
-        <h3 style={{ color: "white", marginBottom: "15px" }}>
-          Book Appointment
-        </h3>
+      {/* Top Cards */}
+      <div className="cards">
+        <div className="card-box">
+          <h4>Book Appointment</h4>
+          <p>Schedule a consultation</p>
+        </div>
 
-        <p style={{ color: "#ccc", marginBottom: "25px" }}>
-          Schedule your consultation with doctors.
-        </p>
+        <div className="card-box">
+          <h4>Medical Records</h4>
+          <p>0 prescriptions</p>
+        </div>
 
-        <button
-          onClick={() => navigate("/book-appointment")}
-          style={buttonStyle}
-        >
-          Book Now
-        </button>
+        <div className="card-box">
+          <h4>Lab Reports</h4>
+          <p>View results</p>
+        </div>
+
+        <div className="card-box">
+          <h4>Video Consult</h4>
+          <p>Join session</p>
+        </div>
       </div>
 
-      {/* Show Appointments */}
-      <div style={{ marginTop: "50px" }}>
-        <h2 style={{ color: "white" }}>Your Appointments</h2>
+      {/* Appointments */}
+      <div className="section">
+        <h3>My Appointments</h3>
 
-        {patientAppointments.length === 0 ? (
-          <p style={{ color: "#ccc" }}>
-            No Appointments Booked Yet
-          </p>
-        ) : (
-          patientAppointments.map((appointment, index) => (
-            <div
-              key={index}
-              style={{
-                backgroundColor: "#111",
-                padding: "15px",
-                margin: "15px auto",
-                width: "450px",
-                borderRadius: "8px",
-                boxShadow: "0 0 10px rgba(255,99,71,0.3)"
-              }}
-            >
-              <p><strong>Doctor:</strong> {appointment.doctorName}</p>
-              <p><strong>Date:</strong> {appointment.date}</p>
-              <p><strong>Time:</strong> {appointment.time}</p>
-            </div>
-          ))
-        )}
+        <div className="appointment-item">
+          <div>
+            <p><strong>Dr. Sarah Chen</strong></p>
+            <span>General Medicine • 2026-02-28 at 11:00 AM</span>
+          </div>
+
+          <button className="status-btn">Scheduled</button>
+        </div>
       </div>
+
+      {/* Prescriptions */}
+      <div className="section">
+        <h3>My E-Prescriptions</h3>
+
+        <div className="empty-box">
+          No prescriptions yet
+        </div>
+      </div>
+
     </div>
   );
 }
-
-const buttonStyle = {
-  width: "100%",
-  padding: "12px",
-  backgroundColor: "tomato",
-  border: "none",
-  color: "white",
-  borderRadius: "6px",
-  fontSize: "16px"
-};
 
 export default PatientDashboard;
