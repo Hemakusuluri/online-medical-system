@@ -1,4 +1,14 @@
+import { useLocation } from "react-router-dom";
+
 function Navbar() {
+  const location = useLocation();
+
+  let role = "Portal";
+
+  if (location.pathname.includes("admin")) role = "Admin Portal";
+  else if (location.pathname.includes("doctor")) role = "Doctor Portal";
+  else if (location.pathname.includes("patient")) role = "Patient Portal";
+
   return (
     <div style={{
       display: "flex",
@@ -9,7 +19,7 @@ function Navbar() {
     }}>
       <div>
         <strong>MediConnect</strong><br />
-        <small>Admin Portal</small>
+        <small>{role}</small>
       </div>
 
       <div>
