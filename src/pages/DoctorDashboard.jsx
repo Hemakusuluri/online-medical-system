@@ -1,54 +1,61 @@
-import { useNavigate } from "react-router-dom";
+import "./DoctorDashboard.css";
 
 function DoctorDashboard() {
-  const navigate = useNavigate();
-
   return (
-    <div
-      style={{
-        backgroundColor: "black",
-        minHeight: "100vh",
-        paddingTop: "80px",
-        textAlign: "center"
-      }}
-    >
-      <h1 style={{ color: "white", marginBottom: "40px" }}>
-        Doctor Dashboard
-      </h1>
+    <div className="doctor-container">
 
-      <div
-        style={{
-          backgroundColor: "#111",
-          padding: "40px",
-          borderRadius: "10px",
-          width: "450px",
-          margin: "auto",
-          boxShadow: "0 0 15px rgba(255,99,71,0.4)"
-        }}
-      >
-        <h3 style={{ color: "white", marginBottom: "15px" }}>
-          Add Prescription
-        </h3>
+      <h2>Doctor Portal</h2>
+      <p className="subtitle">Manage consultations and prescriptions</p>
 
-        <p style={{ color: "#ccc", marginBottom: "25px" }}>
-          Create prescriptions for patients.
-        </p>
+      {/* Top Cards */}
+      <div className="cards">
+        <div className="card-box">
+          <h3 style={{ color: "teal" }}>1</h3>
+          <p>Pending Consultations</p>
+        </div>
 
-        <button
-          onClick={() => navigate("/add-prescription")}
-          style={{
-            width: "100%",
-            padding: "12px",
-            backgroundColor: "tomato",
-            color: "white",
-            border: "none",
-            borderRadius: "6px",
-            fontSize: "16px"
-          }}
-        >
-          Add Prescription
-        </button>
+        <div className="card-box">
+          <h3 style={{ color: "purple" }}>0</h3>
+          <p>Completed Today</p>
+        </div>
+
+        <div className="card-box">
+          <h3 style={{ color: "orange" }}>2</h3>
+          <p>E-Prescriptions</p>
+        </div>
       </div>
+
+      {/* Appointments */}
+      <div className="appointments">
+        <h3>Today's Appointments</h3>
+
+        <div className="appointment-item">
+          <div>
+            <p><strong>John Smith</strong></p>
+            <span>11:00 AM • cold</span>
+          </div>
+
+          <div>
+            <button className="status-btn">Scheduled</button>
+            <button className="start-btn">Start Consult</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Prescription Form */}
+      <div className="prescription">
+        <h3>Issue E-Prescription</h3>
+
+        <div className="form-grid">
+          <input type="text" placeholder="Enter patient name" />
+          <input type="text" placeholder="Medication name" />
+          <input type="text" placeholder="e.g., 500mg twice daily" />
+          <input type="text" placeholder="Optional notes" />
+        </div>
+
+        <button className="submit-btn">Submit Prescription</button>
+      </div>
+
     </div>
   );
 }
