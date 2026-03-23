@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -14,16 +14,18 @@ import PharmacistDashboard from "./pages/PharmacistDashboard";
 import BookAppointment from "./pages/BookAppointment";
 import AddPrescription from "./pages/AddPrescription";
 import AdminManageUsers from "./pages/AdminManageUsers";
-import Register from "./pages/Register";
 
-function App() {
+// 🔥 New component to control layout
+function Layout() {
+  const location = useLocation();
+
+  // ❌ Hide Navbar & Footer on Home page
+  const hideLayout = location.pathname === "/";
+
   return (
-    <Router>
+    <>
+      {!hideLayout && <Navbar />}
 
-      {/* Top Navigation */}
-      <Navbar />
-
-      {/* All Page Routes */}
       <Routes>
         {/* Public Pages */}
         <Route path="/" element={<Home />} />
@@ -39,12 +41,17 @@ function App() {
         <Route path="/book-appointment" element={<BookAppointment />} />
         <Route path="/add-prescription" element={<AddPrescription />} />
         <Route path="/manage-users" element={<AdminManageUsers />} />
-        <Route path="/register" element={<Register />} />
       </Routes>
 
-      {/* Bottom Footer */}
-      <Footer />
+      {!hideLayout && <Footer />}
+    </>
+  );
+}
 
+function App() {
+  return (
+    <Router>
+      <Layout />
     </Router>
   );
 }
